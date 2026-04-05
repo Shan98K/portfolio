@@ -1,33 +1,82 @@
 // reveal-animations.js
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Register ScrollTrigger (Good practice to ensure it's loaded)
     gsap.registerPlugin(ScrollTrigger);
 
-    // 1. MAIN HEADERS (H2)
+    // --- NEW: INITIAL LOAD ANIMATIONS (Nav & Hero) ---
+    // These run immediately without needing to scroll
+    const loadTl = gsap.timeline();
+    
+    loadTl.from("nav", {
+        y: -50,
+        opacity: 0,
+        duration: 1,
+        ease: "power4.out"
+    })
+    .from(".hero h1", {
+        y: 100,
+        opacity: 0,
+        duration: 1.2,
+        ease: "power4.out"
+    }, "-=0.5"); // Starts slightly before nav finishes
+
+    // --- NEW: SKILL TAGS STAGGER ---
+    document.querySelectorAll('.tag-cloud').forEach((cloud) => {
+        gsap.from(cloud.querySelectorAll('.tag'), {
+            scrollTrigger: {
+                trigger: cloud,
+                start: "top 90%",
+            },
+            scale: 0,
+            opacity: 0,
+            stagger: 0.05,
+            duration: 0.8,
+            ease: "back.out(1.7)",
+            clearProps: "all"
+        });
+    });
+
+    // --- NEW: PROJECT INFO REVEAL ---
+    // Your original code animated the visuals, this handles the text side
+    document.querySelectorAll('.project-info').forEach((info) => {
+        gsap.from(info.children, {
+            scrollTrigger: {
+                trigger: info,
+                start: "top 85%",
+            },
+            y: 30,
+            opacity: 0,
+            stagger: 0.1,
+            duration: 1,
+            ease: "power2.out",
+            clearProps: "all"
+        });
+    });
+
+    // 1. MAIN HEADERS (H2) - [YOUR ORIGINAL CODE]
     document.querySelectorAll('h2').forEach((header) => {
         gsap.from(header, {
             scrollTrigger: {
                 trigger: header,
                 start: "top 90%",
                 toggleActions: "play none none none",
-                fastScrollEnd: true, // Prevents logic loops on fast scrolling
+                fastScrollEnd: true,
             },
             x: -100,
             opacity: 0,
             duration: 1.2,
             ease: "power4.out",
-            clearProps: "all" // Cleans up transforms after animation finishes
+            clearProps: "all"
         });
     });
 
-    // 2. PARAGRAPH TAGS
+    // 2. PARAGRAPH TAGS - [YOUR ORIGINAL CODE]
     document.querySelectorAll('section p, .hero-text p').forEach((p) => {
         gsap.from(p, {
             scrollTrigger: {
                 trigger: p,
                 start: "top 92%",
-                once: true // Ensures it doesn't try to recalculate multiple times
+                once: true 
             },
             y: 30,
             opacity: 0,
@@ -38,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 3. PROJECT VISUALS / BENTO ITEMS
+    // 3. PROJECT VISUALS / BENTO ITEMS - [YOUR ORIGINAL CODE]
     document.querySelectorAll('.project-visual, .bento-item').forEach((visual) => {
         gsap.from(visual, {
             scrollTrigger: {
@@ -55,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 4. TIMELINE ITEMS
+    // 4. TIMELINE ITEMS - [YOUR ORIGINAL CODE]
     gsap.from('.timeline-item', {
         scrollTrigger: {
             trigger: '.timeline',
@@ -69,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
         clearProps: "all"
     });
 
-    // 5. METRIC CARDS
+    // 5. METRIC CARDS - [YOUR ORIGINAL CODE]
     gsap.from('.metric-card', {
         scrollTrigger: {
             trigger: '.metrics-grid',
@@ -83,13 +132,13 @@ document.addEventListener('DOMContentLoaded', () => {
         clearProps: "all"
     });
 
-    // 7. FOOTER REVELATION
+    // 7. FOOTER REVELATION - [YOUR ORIGINAL CODE]
     gsap.from(".footer-big-text", {
         scrollTrigger: {
             trigger: "footer",
             start: "top 95%",
         },
-        y: 100, // Reduced from 200 to prevent massive layout shifts
+        y: 100, 
         opacity: 0,
         duration: 2,
         ease: "power4.out",
@@ -109,6 +158,5 @@ document.addEventListener('DOMContentLoaded', () => {
         clearProps: "all"
     });
 
-    // Refresh ScrollTrigger after all initial positions are set
     ScrollTrigger.refresh();
 });
