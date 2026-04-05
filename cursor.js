@@ -1,30 +1,51 @@
 const cursor = document.getElementById('cursor');
 const cursorOutline = document.getElementById('cursor-outline');
 
+// Move the cursors
 window.addEventListener('mousemove', (e) => {
-    const posX = e.clientX;
-    const posY = e.clientY;
+    const { clientX: x, clientY: y } = e;
 
-    // Direct follow for the dot
-    cursor.style.transform = `translate(${posX}px, ${posY}px)`;
+    // Direct follow for the inner dot
+    gsap.to(cursor, {
+        x: x,
+        y: y,
+        duration: 0, // Instant
+        xPercent: -50, // Perfectly centers the div
+        yPercent: -50
+    });
 
-    // Outline follow with a tiny delay (via CSS transition)
-    // We subtract 20 and 4 to center the divs on the tip of the pointer
-    cursor.style.transform = `translate(${posX - 8.5}px, ${posY - 8.5}px)`;
-    cursorOutline.style.transform = `translate(${posX - 20}px, ${posY - 20}px)`;
+    // Smooth follow for the outline
+    gsap.to(cursorOutline, {
+        x: x,
+        y: y,
+        duration: 0.15, // Smooth lag effect
+        xPercent: -50,
+        yPercent: -50,
+        ease: "power2.out"
+    });
 });
 
-// Add expansion effect on interactive elements
-const interactiveElements = document.querySelectorAll('a, .bento-item, button');
+// Hover Effects
+const interactiveElements = document.querySelectorAll('a, .bento-item, button, .interactive-card');
 
 interactiveElements.forEach(el => {
     el.addEventListener('mouseenter', () => {
-        cursorOutline.classList.add('cursor-hover');
-        cursor.style.transform += ' scale(0)';
+        // Hide small dot and grow outline
+        gsap.to(cursor, { scale: 0, duration: 0.2 });
+        gsap.to(cursorOutline, { 
+            scale: 2, 
+            backgroundColor: "rgba(255, 255, 255, 0.1)", // Optional: add a slight fill
+            duration: 0.3 
+        });
     });
     
     el.addEventListener('mouseleave', () => {
-        cursorOutline.classList.remove('cursor-hover');
-        cursor.style.transform = cursor.style.transform.replace(' scale(0)', '');
+        // Bring back the dot and reset outline
+        gsap.to(cursor, { scale: 1, duration: 0.2 });
+        gsap.to(cursorOutline, { 
+            scale: 1, 
+            backgroundColor: "transparent", 
+            duration: 0.3 
+        });
     });
 });
