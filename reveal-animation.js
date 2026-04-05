@@ -1,58 +1,61 @@
 // reveal-animations.js
 
-// Wait for DOM and GSAP to be ready
 document.addEventListener('DOMContentLoaded', () => {
+    // Register ScrollTrigger (Good practice to ensure it's loaded)
+    gsap.registerPlugin(ScrollTrigger);
 
-    // 1. MAIN HEADERS (H2) - Slide from Left to Right
-    // They start off-screen to the left and slide into position
+    // 1. MAIN HEADERS (H2)
     document.querySelectorAll('h2').forEach((header) => {
         gsap.from(header, {
             scrollTrigger: {
                 trigger: header,
-                start: "top 90%", // Starts when header is near bottom of viewport
-                toggleActions: "play none none none"
+                start: "top 90%",
+                toggleActions: "play none none none",
+                fastScrollEnd: true, // Prevents logic loops on fast scrolling
             },
-            x: -100,          // Start 100px to the left
+            x: -100,
             opacity: 0,
             duration: 1.2,
-            ease: "power4.out"
+            ease: "power4.out",
+            clearProps: "all" // Cleans up transforms after animation finishes
         });
     });
 
-    // 2. PARAGRAPH TAGS - Fade Up
-    // Subtle lift effect for body text
+    // 2. PARAGRAPH TAGS
     document.querySelectorAll('section p, .hero-text p').forEach((p) => {
         gsap.from(p, {
             scrollTrigger: {
                 trigger: p,
                 start: "top 92%",
+                once: true // Ensures it doesn't try to recalculate multiple times
             },
-            y: 30,            // Lift up from 30px
+            y: 30,
             opacity: 0,
             duration: 1,
             ease: "power2.out",
-            delay: 0.2        // Slight delay so header moves first
+            delay: 0.2,
+            clearProps: "all"
         });
     });
 
-    // 3. PROJECT VISUALS / PICTURES - Slide Left from Right with Rotation
-    // This gives that "shuffling" card effect
+    // 3. PROJECT VISUALS / BENTO ITEMS
     document.querySelectorAll('.project-visual, .bento-item').forEach((visual) => {
         gsap.from(visual, {
             scrollTrigger: {
                 trigger: visual,
                 start: "top 85%",
             },
-            x: 150,           // Come from the right
-            rotation: 5,      // Slight tilt while entering
+            x: 150,
+            rotation: 5,
             opacity: 0,
-            scale: 0.9,       // Grow into full size
+            scale: 0.9,
             duration: 1.5,
-            ease: "expo.out"
+            ease: "expo.out",
+            clearProps: "all"
         });
     });
 
-    // 4. TIMELINE ITEMS - Staggered Slide In
+    // 4. TIMELINE ITEMS
     gsap.from('.timeline-item', {
         scrollTrigger: {
             trigger: '.timeline',
@@ -60,12 +63,13 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         y: -75,
         opacity: 0,
-        stagger: 0.3,        // One after the other
+        stagger: 0.3,
         duration: 1,
-        ease: "power3.out"
+        ease: "power3.out",
+        clearProps: "all"
     });
 
-    // 5. METRIC CARDS - Pop In
+    // 5. METRIC CARDS
     gsap.from('.metric-card', {
         scrollTrigger: {
             trigger: '.metrics-grid',
@@ -75,19 +79,21 @@ document.addEventListener('DOMContentLoaded', () => {
         opacity: 0,
         stagger: 0.2,
         duration: 0.8,
-        ease: "back.out(1.7)"
+        ease: "back.out(1.7)",
+        clearProps: "all"
     });
+
     // 7. FOOTER REVELATION
-    // We target the big background text and the columns separately
     gsap.from(".footer-big-text", {
         scrollTrigger: {
             trigger: "footer",
             start: "top 95%",
         },
-        y: 200,      // Rises from deep below
+        y: 100, // Reduced from 200 to prevent massive layout shifts
         opacity: 0,
         duration: 2,
-        ease: "power4.out"
+        ease: "power4.out",
+        clearProps: "all"
     });
 
     gsap.from(".footer-col", {
@@ -99,16 +105,10 @@ document.addEventListener('DOMContentLoaded', () => {
         opacity: 0,
         stagger: 0.2,
         duration: 1,
-        ease: "power2.out"
+        ease: "power2.out",
+        clearProps: "all"
     });
 
-    gsap.from(".footer-bottom", {
-        scrollTrigger: {
-            trigger: ".footer-bottom",
-            start: "top 98%",
-        },
-        opacity: 0,
-        duration: 1.5,
-        delay: 0.5
-    });
+    // Refresh ScrollTrigger after all initial positions are set
+    ScrollTrigger.refresh();
 });
