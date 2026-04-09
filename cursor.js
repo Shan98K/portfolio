@@ -26,7 +26,7 @@ window.addEventListener('mousemove', (e) => {
 });
 
 // Hover Effects
-const interactiveElements = document.querySelectorAll('a, .bento-item, button, .interactive-card');
+const interactiveElements = document.querySelectorAll('a, .project-visual, .tag-cloud span, .logo, .sound, .bento-item, button, .interactive-card');
 
 interactiveElements.forEach(el => {
     el.addEventListener('mouseenter', () => {

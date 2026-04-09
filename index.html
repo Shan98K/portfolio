@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap"
         rel="stylesheet">
-        <link rel="shortcut icon" href="./assets/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="./assets/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
     <title>Shan98K | Portfolio</title>
 </head>
@@ -24,7 +24,23 @@
 
     <nav>
         <div class="logo">#Shan98K</div>
+        <div class="sound" id="sound-outside">
+            <div class="sound-Btn s-off">
+                <img src="./assets/sound-off.svg" alt="">
+            </div>
+            <div class="sound-Btn s-on">
+                <img src="./assets/sound-on.svg" alt="">
+            </div>
+        </div>
         <div class="nav-links">
+            <div class="sound">
+                <div class="sound-Btn s-off">
+                    <img src="./assets/sound-off.svg" alt="">
+                </div>
+                <div class="sound-Btn s-on">
+                    <img src="./assets/sound-on.svg" alt="">
+                </div>
+            </div>
             <a href="#about">Story</a>
             <a href="#expertise">Expertise</a>
             <a href="#projects">Engineering</a>
@@ -48,10 +64,11 @@
         </div>
     </div>
 
-    <section id="about" class="hero">
+    <section id="about" class="hero" style="height: 100vh;">
         <div class="hero-text">
             <h1>WEB <span class="highlight">Arcitect</span></h1>
-            <p>I architect scalable digital systems that prioritize high performance and intuitive user experiences. My
+            <p class="animate-p">I architect scalable digital systems that prioritize high performance and intuitive
+                user experiences. My
                 focus is on turning complex data into seamless, fast-loading interfaces.</p>
             <div class="metrics-grid">
                 <div class="metric-card">
@@ -70,12 +87,42 @@
         </div>
     </section>
 
+    <div class="move" id="move-down" onclick="skipVideo()">
+        <img src="./assets/arrow-down.svg" alt="">
+    </div>
+    <div class="canvasContainer" id="video-trigger">
+        <button class="resumeBtn" onclick="window.open('./assets/Shan98K_Resume.pdf')">MY_Resume</button>
+        <canvas id="canvas"></canvas>
+    </div>
+    <div class="move" id="move-up" onclick="backToVideo()">
+        <img src="./assets/arrow-down.svg" alt="">
+    </div>
+
+    <script>
+        function backToVideo() {
+            const videoSection = document.getElementById("video-trigger");
+            videoSection.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function skipVideo() {
+            const videoSection = document.getElementById("video-trigger");
+
+            const offset = videoSection.offsetTop + videoSection.offsetHeight;
+
+            window.scrollTo({
+                top: offset,
+                behavior: 'smooth'
+            });
+        }
+    </script>
+
     <section id="expertise">
         <h2 class="reveal">Core <span class="highlight">Competencies</span></h2>
         <div class="skill-section">
             <div class="skill-group reveal">
                 <h3>Frontend Architecture</h3>
-                <p style="color: var(--text-dim); margin-bottom: 20px; font-size: 0.9rem;">Building high-interaction,
+                <p class="animate-p" style="color: var(--text-dim); margin-bottom: 20px; font-size: 0.9rem;">Building
+                    high-interaction,
                     responsive SPAs with modern frameworks.</p>
                 <div class="tag-cloud">
                     <span class="tag">React.js</span><span class="tag">React Native</span><span
@@ -86,7 +133,8 @@
             </div>
             <div class="skill-group reveal">
                 <h3>Backend & Systems</h3>
-                <p style="color: var(--text-dim); margin-bottom: 20px; font-size: 0.9rem;">Designing robust APIs and
+                <p class="animate-p" style="color: var(--text-dim); margin-bottom: 20px; font-size: 0.9rem;">Designing
+                    robust APIs and
                     real-time database management.</p>
                 <div class="tag-cloud">
                     <span class="tag">Node.js</span><span class="tag">Firebase</span><span class="tag">Supabase</span>
@@ -96,7 +144,8 @@
             </div>
             <div class="skill-group reveal">
                 <h3>Engineering Standards</h3>
-                <p style="color: var(--text-dim); margin-bottom: 20px; font-size: 0.9rem;">Deployment, optimization, and
+                <p class="animate-p" style="color: var(--text-dim); margin-bottom: 20px; font-size: 0.9rem;">Deployment,
+                    optimization, and
                     team mentoring.</p>
                 <div class="tag-cloud">
                     <span class="tag">Vercel</span><span class="tag">Git / GitHub</span><span class="tag">UI/UX
@@ -164,7 +213,7 @@
                         class="tag">SEO Tuning</span></div>
             </div>
             <div class="project-visual">
-                <p style="opacity: 0.3; font-weight: 800; font-size: 2rem;">[ MOTION PREVIEW ]</p>
+                <p style="opacity: 0.3; font-weight: 800;">[ MOTION PREVIEW ]</p>
             </div>
         </div>
     </section>
@@ -242,6 +291,8 @@
                     </li>
                     <li><a href="https://instagram.com/Shan98K" target="_blank" rel="noopener noreferrer">Instagram</a>
                     </li>
+                    <li><a onclick="window.open('./assets/Shan98K_Resume.pdf')" target="_blank"
+                            rel="noopener noreferrer">My Resume</a></li>
                 </ul>
             </div>
             <div class="footer-col">
@@ -274,7 +325,9 @@
 
     <script src="./popup.js"></script>
     <script src="./cursor.js"></script>
+    <script src="./3d-scroll.js"></script>
     <script src="./liquid-mist.js"></script>
+    <script src="./sound-toggle.js"></script>
     <script src="./smoothScroll.js"></script>
     <script src="./parallax-hover.js"></script>
     <script src="./reveal-animation.js"></script>

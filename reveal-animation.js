@@ -1,24 +1,19 @@
-// reveal-animations.js
-
 document.addEventListener('DOMContentLoaded', () => {
     gsap.registerPlugin(ScrollTrigger);
-
-    // --- NEW: INITIAL LOAD ANIMATIONS (Nav & Hero) ---
-    // These run immediately without needing to scroll
     const loadTl = gsap.timeline();
-    
+
     loadTl.from("nav", {
         y: -50,
         opacity: 0,
         duration: 1,
         ease: "power4.out"
     })
-    .from(".hero h1", {
-        y: 100,
-        opacity: 0,
-        duration: 1.2,
-        ease: "power4.out"
-    }, "-=0.5"); // Starts slightly before nav finishes
+        .from(".hero h1", {
+            y: 0,
+            opacity: 0,
+            duration: 1.2,
+            ease: "power4.out"
+        }, "-=0.5");
 
     // --- NEW: SKILL TAGS STAGGER ---
     document.querySelectorAll('.tag-cloud').forEach((cloud) => {
@@ -71,19 +66,20 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // 2. PARAGRAPH TAGS - [YOUR ORIGINAL CODE]
-    document.querySelectorAll('section p, .hero-text p').forEach((p) => {
-        gsap.from(p, {
+    document.querySelectorAll('.animate-p').forEach((section) => {
+        gsap.from(section, {
             scrollTrigger: {
-                trigger: p,
+                trigger: section,
                 start: "top 92%",
-                once: true 
+                once: true
             },
             y: 30,
             opacity: 0,
-            duration: 1,
+            duration: 1.2,
             ease: "power2.out",
-            delay: 0.2,
-            clearProps: "all"
+            delay: 0.3,
+            // Only remove the animation properties, leave the rest alone
+            clearProps: "transform,opacity"
         });
     });
 
@@ -132,13 +128,27 @@ document.addEventListener('DOMContentLoaded', () => {
         clearProps: "all"
     });
 
+    // 5.(copy) Move_Arrow - [YOUR ORIGINAL CODE]
+    gsap.from('.move', {
+        scrollTrigger: {
+            trigger: '.move',
+            start: "top 90%",
+        },
+        scale: 0,
+        opacity: 0,
+        stagger: 0.2,
+        duration: 0.8,
+        ease: "back.out(1.7)",
+        clearProps: "all"
+    });
+
     // 7. FOOTER REVELATION - [YOUR ORIGINAL CODE]
     gsap.from(".footer-big-text", {
         scrollTrigger: {
             trigger: "footer",
             start: "top 95%",
         },
-        y: 100, 
+        y: 100,
         opacity: 0,
         duration: 2,
         ease: "power4.out",
