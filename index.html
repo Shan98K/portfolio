@@ -90,31 +90,13 @@
     <div class="move" id="move-down" onclick="skipVideo()">
         <img src="./assets/arrow-down.svg" alt="">
     </div>
-    <div class="canvasContainer" id="video-trigger">
+    <div class="canvasContainer" id="video-trigger-intro">
         <button class="resumeBtn" onclick="window.open('./assets/Shan98K_Resume.pdf')">MY_Resume</button>
         <canvas id="canvas"></canvas>
     </div>
     <div class="move" id="move-up" onclick="backToVideo()">
         <img src="./assets/arrow-down.svg" alt="">
     </div>
-
-    <script>
-        function backToVideo() {
-            const videoSection = document.getElementById("video-trigger");
-            videoSection.scrollIntoView({ behavior: 'smooth' });
-        }
-        
-        function skipVideo() {
-            const videoSection = document.getElementById("video-trigger");
-
-            const offset = videoSection.offsetTop + videoSection.offsetHeight;
-
-            window.scrollTo({
-                top: offset,
-                behavior: 'smooth'
-            });
-        }
-    </script>
 
     <section id="expertise">
         <h2 class="reveal">Core <span class="highlight">Competencies</span></h2>
@@ -274,6 +256,17 @@
         </div>
     </section>
 
+    <div class="move" id="move-down" onclick="skipVideo()">
+        <img src="./assets/arrow-down.svg" alt="">
+    </div>
+    <div class="canvasContainer" id="video-trigger-outro">
+        <!-- <button class="resumeBtn" onclick="window.open('./assets/Shan98K_Resume.pdf')">MY_CV</button> -->
+        <canvas id="canvas-outro"></canvas>
+    </div>
+    <div class="move" id="move-up" onclick="backToVideo()">
+        <img src="./assets/arrow-down.svg" alt="">
+    </div>
+
     <footer>
         <div class="footer-grid">
             <div class="footer-col">
@@ -339,6 +332,24 @@
             });
         }, { threshold: 0.1 });
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+
+    <script>
+        function backToVideo() {
+            const videoSection = document.getElementById("video-trigger");
+            videoSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function skipVideo() {
+            const videoSection = document.getElementById("video-trigger");
+
+            const offset = videoSection.offsetTop + videoSection.offsetHeight;
+
+            window.scrollTo({
+                top: offset,
+                behavior: 'smooth'
+            });
+        }
     </script>
 
 </html>
