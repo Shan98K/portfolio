@@ -251,15 +251,15 @@ canvas {
 
 /* Intro scroll length */
 #video-trigger-intro {
-    height: 400vh; 
+    height: 400vh;
     position: relative;
 }
 
 /* Outro scroll length */
-#video-trigger-outro {
+/* #video-trigger-outro {
     height: 450vh;
     position: relative;
-}
+} */
 
 /* Ensure the canvas covers the screen while scrolling */
 .canvasContainer canvas {
@@ -271,9 +271,34 @@ canvas {
     object-fit: cover;
 }
 
+.hero {
+    padding-top: 200px;
+}
+
 section {
     padding: 120px 10%;
     min-height: 80vh;
+}
+
+#reviews {
+    padding: 0px 10%;
+    min-height: 80vh;
+    height: 80vh;
+    max-height: 80vh;
+}
+
+#reviews hr {
+    border-color: #000;
+}
+
+#reviews hr:first-child {
+    margin-bottom: 25px;
+    border-color: #000;
+}
+
+#reviews hr:last-child {
+    margin-top: 25px;
+    border-color: #000;
 }
 
 h2 {
@@ -493,6 +518,252 @@ h2 {
     font-size: 0.95rem;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#reviews {
+    padding: 100px 0;
+    overflow: hidden;
+}
+
+.marquee-wrapper {
+    display: flex;
+    width: 100%;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.review-track {
+    display: flex;
+    gap: 30px;
+    padding-inline: 20px;
+    animation: marquee-scroll 40s linear infinite;
+    width: max-content;
+}
+
+.review-track:hover {
+    animation-play-state: paused;
+    cursor: none;
+}
+
+.review-card {
+    width: 450px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    padding: 35px;
+    border-radius: 24px;
+    flex-shrink: 0;
+    transition: border-color 0.3s ease;
+}
+
+.review-card:hover {
+    border-color: var(--accent);
+}
+
+@keyframes marquee-scroll {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+@media (max-width: 768px) {
+    .review-track {
+        animation-duration: 25s;
+    }
+
+    .review-card {
+        width: 300px;
+    }
+
+    #reviews {
+        min-height: 20vh;
+        height: 50vh;
+        max-height: 50vh;
+    }
+}
+
+.stars {
+    color: var(--accent);
+    /* Uses your #00ffcc variable */
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    letter-spacing: 2px;
+    /* Optional: Adds a subtle glow to match your high-interaction UI */
+    text-shadow: 0 0 8px rgba(0, 255, 204, 0.3);
+}
+
+/* Ensure the empty stars (☆) are slightly dimmer if you prefer */
+.stars {
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 footer {
     padding: 100px 10% 50px;
     border-top: 1px solid var(--border);
@@ -628,6 +899,10 @@ h2 {
 }
 
 @media (max-width: 768px) {
+    .hero {
+        padding-top: 0px;
+    }
+
     .bento-grid {
         grid-template-columns: 1fr;
         grid-auto-rows: min-content;

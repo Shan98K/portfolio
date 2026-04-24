@@ -1,0 +1,20 @@
+[
+    {
+        "name": "Aman Kumar",
+        "project": "Evolution Gym Website",
+        "rating": 5,
+        "review": "The performance optimization was incredible. Our site loads instantly now, and the UI is pure art. A top-tier engineering job."
+    },
+    {
+        "name": "Sneha Reddy",
+        "project": "Nexus E-commerce",
+        "rating": 5,
+        "review": "Architected a complex backend into a seamless experience. The integration of the payment gateways was flawless."
+    },
+    {
+        "name": "Rahul Varma",
+        "project": "FinTech Dashboard",
+        "rating": 4,
+        "review": "Great attention to detail and scalability. The custom smooth scrolling and interactive data modules are top-notch."
+    }
+]
