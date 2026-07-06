@@ -319,6 +319,71 @@ h2 {
     gap: 50px;
 }
 
+.global-bg-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -15; /* Keeps it behind all nav components, hero text, and section items */
+    overflow: hidden;
+    background: #030303;
+    pointer-events: none; /* Prevents the video track from hijacking mouse interaction/scroll clicks */
+    will-change: transform;
+}
+
+.bg-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Guarantees edge-to-edge scaling without distorting aspect ratios */
+    object-position: right center;
+    transform: translate(-50%, -50%);
+    opacity: 0.35; /* Adjusted blend opacity so text maintains crisp contrast */
+    mix-blend-mode: screen; /* Blends the video lights directly into the canvas dark colors */
+}
+
+.bg-grid-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: 60px 60px;
+    background-image: 
+        linear-gradient(to right, rgba(0, 242, 254, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0, 242, 254, 0.03) 1px, transparent 1px);
+}
+
+/* Perfect edge fade matrix */
+.bg-vignette {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+        circle at 50% 50%, 
+        transparent 15%, 
+        rgba(3, 3, 3, 0.4) 45%, 
+        rgba(3, 3, 3, 0.85) 75%, 
+        #030303 100__percent__
+    );
+}
+
+.cyber-scanline {
+    position: absolute;
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.2) 50%);
+    background-size: 100% 4px;
+    opacity: 0.3;
+}
+
 .hero-text {
     flex: 1;
 }
@@ -518,104 +583,6 @@ h2 {
     font-size: 0.95rem;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #reviews {
     padding: 100px 0;
     overflow: hidden;
@@ -697,72 +664,6 @@ h2 {
     -webkit-user-select: none;
     user-select: none;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 footer {
     padding: 100px 10% 50px;
@@ -1076,6 +977,10 @@ html.lenis {
         text-align: center;
     }
 
+    .hero .hero-text {
+        margin-top: -70px;
+    }
+
     .hero-text p {
         margin: 0 auto 30px;
     }
@@ -1091,6 +996,10 @@ html.lenis {
 }
 
 @media (max-width: 768px) {
+    .hero .hero-text {
+        margin-top: 125px;
+    }
+
     .footer-grid {
         grid-template-columns: 1fr;
         gap: 40px;
