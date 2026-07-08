@@ -21,21 +21,7 @@
         <div class="vector-matrix" id="matrix-grid"></div>
     </div>
 
-    <script>
-        // Custom Cursor Interaction Pipeline
-        const cursor = document.getElementById('cursor');
-        const cursorOutline = document.getElementById('cursor-outline');
-
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-
-            cursorOutline.animate({
-                left: e.clientX + 'px',
-                top: e.clientY + 'px'
-            }, { duration: 250, fill: "forwards" });
-        });
-
+<script>
         // Bento Card Spotlight Radial Tracking Effect
         const cards = document.querySelectorAll('.bento-item');
         cards.forEach(card => {
