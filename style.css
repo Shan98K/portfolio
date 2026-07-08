@@ -38,6 +38,62 @@ body {
     line-height: 1.7;
 }
 
+#extraordinary-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100dvh;
+    background: #020202;
+    z-index: 100000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    perspective: 1500px;
+    pointer-events: all;
+    transition: opacity 0.8s cubic-bezier(0.85, 0, 0.15, 1), visibility 0.8s;
+}
+
+.vector-matrix {
+    position: absolute;
+    width: 140vw;
+    height: 140vh;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(12, 1fr);
+    gap: 6px;
+    transform: rotateX(24deg) rotateY(-12deg) rotateZ(5deg);
+}
+
+.matrix-cell {
+    position: relative;
+    background: #070707;
+    border: 1px solid rgba(0, 255, 204, 0.05);
+    border-radius: 6px;
+    transition: transform 1.1s cubic-bezier(0.68, -0.6, 0.32, 1.6), opacity 0.9s ease, background 0.4s;
+    will-change: transform, opacity;
+}
+
+/* Ambient node illumination sequence */
+#extraordinary-loader.scanning .matrix-cell {
+    border-color: rgba(0, 255, 204, 0.2);
+    background: rgba(0, 255, 204, 0.02);
+}
+
+/* DYNAMIC SCATTER EFFECT: Moving blocks past the screen unevenly */
+#extraordinary-loader.shatter .matrix-cell {
+    opacity: 0;
+    background: rgba(0, 255, 204, 0.1);
+    border-color: transparent;
+}
+
+#extraordinary-loader.faded {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
 #cursor {
     width: 17px;
     height: 17px;
@@ -154,129 +210,12 @@ nav {
     color: var(--accent);
 }
 
-.move {
-    width: 100%;
-    height: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    pointer-events: auto;
-}
-
-.move img {
-    height: 55px;
-    width: 55px;
-    transition: 0.3s;
-    pointer-events: auto;
-}
-
-#move-up img {
-    rotate: 180deg;
-    pointer-events: auto;
-}
-
-.move img:hover {
-    animation: arrow 0.5s ease-in-out forwards;
-    pointer-events: auto;
-}
-
-.move img:hover {
-    scale: 1.2;
-    pointer-events: auto;
-}
-
-@keyframes arrow {
-    0% {
-        pointer-events: auto;
-    }
-
-    65% {
-        transform: scale(1.5);
-        pointer-events: auto;
-    }
-
-    100% {
-        transform: scale(1.2);
-        pointer-events: auto;
-    }
-}
-
-.canvasContainer {
-    position: relative;
-    width: 100%;
-    height: 1250vh;
-    background: black;
-}
-
-canvas {
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    display: block;
-    object-fit: cover;
-}
-
-.resumeBtn {
-    padding-block: 7.5px;
-    padding-inline: 15px;
-    border-radius: 20px;
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    font-weight: 900;
-    -webkit-backdrop-filter: blur(5px);
-    backdrop-filter: blur(5px);
-    box-shadow: 0 0 10px rgba(128, 128, 128, 0.5) inset;
-    z-index: 9999;
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transition: opacity 0.4s ease, visibility 0.4s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.resumeBtn.active {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    mix-blend-mode: difference;
-}
-
-/* Intro scroll length */
-#video-trigger-intro {
-    height: 400vh;
-    position: relative;
-}
-
-/* Outro scroll length */
-/* #video-trigger-outro {
-    height: 450vh;
-    position: relative;
-} */
-
-/* Ensure the canvas covers the screen while scrolling */
-.canvasContainer canvas {
-    position: sticky;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    object-fit: cover;
-}
-
 .hero {
     padding-top: 200px;
 }
 
 section {
-    padding: 120px 10%;
+    padding: 35px 10%;
     min-height: 80vh;
 }
 
@@ -325,10 +264,12 @@ h2 {
     left: 0;
     width: 100vw;
     height: 100vh;
-    z-index: -15; /* Keeps it behind all nav components, hero text, and section items */
+    z-index: -15;
+    /* Keeps it behind all nav components, hero text, and section items */
     overflow: hidden;
     background: #030303;
-    pointer-events: none; /* Prevents the video track from hijacking mouse interaction/scroll clicks */
+    pointer-events: none;
+    /* Prevents the video track from hijacking mouse interaction/scroll clicks */
     will-change: transform;
 }
 
@@ -338,11 +279,14 @@ h2 {
     left: 50%;
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Guarantees edge-to-edge scaling without distorting aspect ratios */
+    object-fit: cover;
+    /* Guarantees edge-to-edge scaling without distorting aspect ratios */
     object-position: right center;
     transform: translate(-50%, -50%);
-    opacity: 0.35; /* Adjusted blend opacity so text maintains crisp contrast */
-    mix-blend-mode: screen; /* Blends the video lights directly into the canvas dark colors */
+    opacity: 0.35;
+    /* Adjusted blend opacity so text maintains crisp contrast */
+    mix-blend-mode: screen;
+    /* Blends the video lights directly into the canvas dark colors */
 }
 
 .bg-grid-overlay {
@@ -352,7 +296,7 @@ h2 {
     width: 100%;
     height: 100%;
     background-size: 60px 60px;
-    background-image: 
+    background-image:
         linear-gradient(to right, rgba(0, 242, 254, 0.03) 1px, transparent 1px),
         linear-gradient(to bottom, rgba(0, 242, 254, 0.03) 1px, transparent 1px);
 }
@@ -364,20 +308,18 @@ h2 {
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(
-        circle at 50% 50%, 
-        transparent 15%, 
-        rgba(3, 3, 3, 0.4) 45%, 
-        rgba(3, 3, 3, 0.85) 75%, 
-        #030303 100__percent__
-    );
+    background: radial-gradient(circle at 50% 50%,
+            transparent 15%,
+            rgba(3, 3, 3, 0.4) 45%,
+            rgba(3, 3, 3, 0.85) 75%,
+            #030303 100__percent__);
 }
 
 .cyber-scanline {
     position: absolute;
-    top: 0; 
-    left: 0; 
-    width: 100%; 
+    top: 0;
+    left: 0;
+    width: 100%;
     height: 100%;
     background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.2) 50%);
     background-size: 100% 4px;
@@ -415,6 +357,19 @@ h2 {
     padding-left: 30px;
 }
 
+.metric-card {
+    background: linear-gradient(to right,
+            rgba(0, 255, 204, 0.25) 50%,
+            transparent 50%);
+    background-size: 200% 100%;
+    background-position: right bottom;
+    transition: background-position 0.3s ease;
+}
+
+.metric-card:hover {
+    background-position: left bottom;
+}
+
 .metric-card h4 {
     font-size: 2.5rem;
     color: var(--accent);
@@ -423,6 +378,14 @@ h2 {
 .metric-card p {
     font-size: 0.85rem;
     opacity: 0.7;
+}
+
+.metric-card:hover h4 {
+    color: var(--text-dim);
+}
+
+.metric-card:hover p {
+    color: var(--card-bg);
 }
 
 .skill-section {
@@ -729,7 +692,7 @@ footer {
 }
 
 #services {
-    padding: 120px 10%;
+    padding: 20px 10%;
     min-height: 80vh;
 }
 
@@ -1026,6 +989,58 @@ html.lenis {
         display: block;
         filter: brightness(1);
         scale: 1.25;
+    }
+}
+
+@media (max-width: 700px) {
+    nav {
+        padding: 0.75rem 5.5% ;
+    }
+
+    .logo {
+        font-size: 1.35rem;
+    }
+
+    .sound-Btn {
+        display: flex;
+        align-self: center;
+        justify-content: center;
+        width: 45px;
+    }
+
+    .sound-Btn img {
+        width: 35px;
+        height: 35px;
+    }
+
+    nav .nav-links a {
+        font-size: 0.75rem;
+    }
+}
+
+@media (max-width: 600px) {
+    nav {
+        padding: 0.5rem 4% ;
+    }
+
+    .logo {
+        font-size: 1rem;
+    }
+
+    .sound-Btn {
+        display: flex;
+        align-self: center;
+        justify-content: center;
+        width: 40px;
+    }
+
+    .sound-Btn img {
+        width: 30px;
+        height: 30px;
+    }
+
+    nav .nav-links a {
+        font-size: 0.7rem;
     }
 }
 

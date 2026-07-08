@@ -16,6 +16,91 @@
 </head>
 
 <body>
+
+    <div id="extraordinary-loader">
+        <div class="vector-matrix" id="matrix-grid"></div>
+    </div>
+
+    <script>
+        // Custom Cursor Interaction Pipeline
+        const cursor = document.getElementById('cursor');
+        const cursorOutline = document.getElementById('cursor-outline');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+
+            cursorOutline.animate({
+                left: e.clientX + 'px',
+                top: e.clientY + 'px'
+            }, { duration: 250, fill: "forwards" });
+        });
+
+        // Bento Card Spotlight Radial Tracking Effect
+        const cards = document.querySelectorAll('.bento-item');
+        cards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--x', `${x}px`);
+                card.style.setProperty('--y', `${y}px`);
+            });
+        });
+
+        const loaderContainer = document.getElementById('extraordinary-loader');
+        const matrixGrid = document.getElementById('matrix-grid');
+        const totalCells = 144; // expanded grid capacity (12x12)
+
+        // Generate individual nodes with mathematical offset positions for translation trajectories
+        for (let i = 0; i < totalCells; i++) {
+            const cell = document.createElement('div');
+            cell.classList.add('matrix-cell');
+
+            // Mathematical variation mapping for scatter trajectories
+            const randomTranslateX = (Math.random() * 800 - 400).toFixed(2);
+            const randomTranslateY = (Math.random() * -1200 - 600).toFixed(2); // Mostly flying upwards and out
+            const randomRotate = (Math.random() * 360 - 180).toFixed(2);
+            const randomScale = (Math.random() * 0.4 + 0.1).toFixed(2);
+
+            // Inject structural styles dynamically based on grid matrix index loops
+            cell.style.setProperty('--tx', `${randomTranslateX}px`);
+            cell.style.setProperty('--ty', `${randomTranslateY}px`);
+            cell.style.setProperty('--rot', `${randomRotate}deg`);
+            cell.style.setProperty('--sc', randomScale);
+
+            // Staggered uneven delay patterns to simulate random matrix breakdown passing by the screen
+            const delay = (Math.random() * 1.2).toFixed(2);
+            cell.style.transitionDelay = `${delay}s`;
+
+            // Handle the physical transformation calculations upon transition trigger
+            cell.addEventListener('transitionstart', () => {
+                if (loaderContainer.classList.contains('shatter')) {
+                    cell.style.transform = `translate3d(${cell.style.getPropertyValue('--tx')}, ${cell.style.getPropertyValue('--ty')}, 300px) scale(${cell.style.getPropertyValue('--sc')}) rotate(${cell.style.getPropertyValue('--rot')})`;
+                }
+            });
+
+            matrixGrid.appendChild(cell);
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            // Step 1: Initialize ambient micro-grid colorization
+            setTimeout(() => {
+                loaderContainer.classList.add('scanning');
+            }, 100);
+
+            // Step 2: Trigger the uneven staggered matrix clear sequence
+            setTimeout(() => {
+                loaderContainer.classList.add('shatter');
+            }, 1400);
+
+            // Step 3: Evaporate canvas overlay and return page control entirely
+            setTimeout(() => {
+                loaderContainer.classList.add('faded');
+            }, 3000);
+        });
+    </script>
+
     <div id="cursor"></div>
     <div id="cursor-outline"></div>
     <div id="fluid-container">
@@ -95,17 +180,6 @@
             </div>
         </div>
     </section>
-
-    <div class="move" id="move-down" onclick="skipVideo()">
-        <img src="./assets/arrow-down.svg" alt="">
-    </div>
-    <div class="canvasContainer" id="video-trigger-intro">
-        <button class="resumeBtn" onclick="window.open('./assets/Shan98K_Resume.pdf')">MY_Resume</button>
-        <canvas id="canvas"></canvas>
-    </div>
-    <div class="move" id="move-up" onclick="backToVideo()">
-        <img src="./assets/arrow-down.svg" alt="">
-    </div>
 
     <section id="expertise">
         <h2 class="reveal">Core <span class="highlight">Competencies</span></h2>
@@ -265,6 +339,10 @@
         </div>
     </section>
 
+    <section id="services" style="height: max-content; min-height: 0px; margin-bottom: -135px;">
+        <h2 class="reveal">Career <span class="highlight">Reviews</span></h2>
+    </section>
+
     <section id="reviews">
         <hr>
         <!-- <h2 class="reveal">Client <span class="highlight">Intelligence</span></h2> -->
@@ -341,24 +419,6 @@
             });
         }, { threshold: 0.1 });
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-    </script>
-
-    <script>
-        function backToVideo() {
-            const videoSection = document.getElementById("video-trigger");
-            videoSection.scrollIntoView({ behavior: 'smooth' });
-        }
-
-        function skipVideo() {
-            const videoSection = document.getElementById("video-trigger");
-
-            const offset = videoSection.offsetTop + videoSection.offsetHeight;
-
-            window.scrollTo({
-                top: offset,
-                behavior: 'smooth'
-            });
-        }
     </script>
 
 </html>
