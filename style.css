@@ -17,6 +17,7 @@
     scrollbar-width: none;
     -webkit-user-select: none;
     user-select: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
 html {
@@ -1110,6 +1111,7 @@ html.lenis {
         height: max-content;
         max-height: 65vh;
     }
+
     footer {
         padding-bottom: 25px;
     }
