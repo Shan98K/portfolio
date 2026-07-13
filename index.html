@@ -4,10 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap"
         rel="stylesheet">
     <link rel="shortcut icon" href="./assets/favicon.png" type="image/x-icon">
@@ -20,72 +16,6 @@
     <div id="extraordinary-loader">
         <div class="vector-matrix" id="matrix-grid"></div>
     </div>
-
-<script>
-        // Bento Card Spotlight Radial Tracking Effect
-        const cards = document.querySelectorAll('.bento-item');
-        cards.forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                card.style.setProperty('--x', `${x}px`);
-                card.style.setProperty('--y', `${y}px`);
-            });
-        });
-
-        const loaderContainer = document.getElementById('extraordinary-loader');
-        const matrixGrid = document.getElementById('matrix-grid');
-        const totalCells = 144; // expanded grid capacity (12x12)
-
-        // Generate individual nodes with mathematical offset positions for translation trajectories
-        for (let i = 0; i < totalCells; i++) {
-            const cell = document.createElement('div');
-            cell.classList.add('matrix-cell');
-
-            // Mathematical variation mapping for scatter trajectories
-            const randomTranslateX = (Math.random() * 800 - 400).toFixed(2);
-            const randomTranslateY = (Math.random() * -1200 - 600).toFixed(2); // Mostly flying upwards and out
-            const randomRotate = (Math.random() * 360 - 180).toFixed(2);
-            const randomScale = (Math.random() * 0.4 + 0.1).toFixed(2);
-
-            // Inject structural styles dynamically based on grid matrix index loops
-            cell.style.setProperty('--tx', `${randomTranslateX}px`);
-            cell.style.setProperty('--ty', `${randomTranslateY}px`);
-            cell.style.setProperty('--rot', `${randomRotate}deg`);
-            cell.style.setProperty('--sc', randomScale);
-
-            // Staggered uneven delay patterns to simulate random matrix breakdown passing by the screen
-            const delay = (Math.random() * 1.2).toFixed(2);
-            cell.style.transitionDelay = `${delay}s`;
-
-            // Handle the physical transformation calculations upon transition trigger
-            cell.addEventListener('transitionstart', () => {
-                if (loaderContainer.classList.contains('shatter')) {
-                    cell.style.transform = `translate3d(${cell.style.getPropertyValue('--tx')}, ${cell.style.getPropertyValue('--ty')}, 300px) scale(${cell.style.getPropertyValue('--sc')}) rotate(${cell.style.getPropertyValue('--rot')})`;
-                }
-            });
-
-            matrixGrid.appendChild(cell);
-        }
-
-        window.addEventListener('DOMContentLoaded', () => {
-            // Step 1: Initialize ambient micro-grid colorization
-            setTimeout(() => {
-                loaderContainer.classList.add('scanning');
-            }, 100);
-
-            // Step 2: Trigger the uneven staggered matrix clear sequence
-            setTimeout(() => {
-                loaderContainer.classList.add('shatter');
-            }, 1400);
-
-            // Step 3: Evaporate canvas overlay and return page control entirely
-            setTimeout(() => {
-                loaderContainer.classList.add('faded');
-            }, 3000);
-        });
-    </script>
 
     <div id="cursor"></div>
     <div id="cursor-outline"></div>
@@ -135,11 +65,12 @@
         </div>
     </div>
 
-    <section id="about" class="hero" style="height: 100vh;">
+    <section id="about" class="hero">
         <div class="global-bg-wrapper">
-            <video class="bg-video" autoplay loop muted playsinline poster="./assets/hero_section_object_video.png">
-                <source src="./assets/hero_section_object_video.webm" type="video/webm">
-                <source src="./assets/hero_section_object_video.mp4" type="video/mp4">
+            <video class="bg-video" loop muted playsinline preload="none" id="hero-video"
+                poster="./assets/hero_section_object_video_30fps_15s.png">
+                <!-- <source src="./assets/hero_section_object_video_30fps_15s.webm" type="video/webm">
+                <source src="./assets/hero_section_object_video_30fps_15s.mp4" type="video/mp4"> -->
             </video>
             <div class="bg-grid-overlay"></div>
             <div class="bg-vignette"></div>
@@ -176,9 +107,9 @@
                     high-interaction,
                     responsive SPAs with modern frameworks.</p>
                 <div class="tag-cloud">
-                    <span class="tag">React.js</span><span class="tag">React Native</span><span
-                        class="tag">TypeScript</span>
-                    <span class="tag">Next.js</span><span class="tag">Tailwind CSS</span><span class="tag">Vanilla
+                    <span class="tag magnetic">React.js</span><span class="tag magnetic">React Native</span><span
+                        class="tag magnetic">TypeScript</span>
+                    <span class="tag magnetic">Next.js</span><span class="tag magnetic">Tailwind CSS</span><span class="tag magnetic">Vanilla
                         JavaScript</span>
                 </div>
             </div>
@@ -188,8 +119,8 @@
                     robust APIs and
                     real-time database management.</p>
                 <div class="tag-cloud">
-                    <span class="tag">Node.js</span><span class="tag">Firebase</span><span class="tag">Supabase</span>
-                    <span class="tag">RESTful APIs</span><span class="tag">Python</span><span class="tag">State
+                    <span class="tag magnetic">Node.js</span><span class="tag magnetic">Firebase</span><span class="tag magnetic">Supabase</span>
+                    <span class="tag magnetic">RESTful APIs</span><span class="tag magnetic">Python</span><span class="tag magnetic">State
                         Management</span>
                 </div>
             </div>
@@ -199,10 +130,10 @@
                     optimization, and
                     team mentoring.</p>
                 <div class="tag-cloud">
-                    <span class="tag">Vercel</span><span class="tag">Git / GitHub</span><span class="tag">UI/UX
+                    <span class="tag magnetic">Vercel</span><span class="tag magnetic">Git / GitHub</span><span class="tag magnetic">UI/UX
                         Design</span>
-                    <span class="tag">Performance Tuning</span><span class="tag">Responsive Systems</span><span
-                        class="tag">Mentorship</span>
+                    <span class="tag magnetic">Performance Tuning</span><span class="tag magnetic">Responsive Systems</span><span
+                        class="tag magnetic">Mentorship</span>
                 </div>
             </div>
         </div>
@@ -222,11 +153,11 @@
                     <li>Integrated real-time database to manage 500+ concurrent users with zero lag.</li>
                     <li>Optimized for internal campus hosting and rapid data processing.</li>
                 </ul>
-                <div class="tag-cloud"><span class="tag">React</span><span class="tag">Database Design</span><span
-                        class="tag">Scalability</span></div>
+                <div class="tag-cloud"><span class="tag magnetic">React</span><span class="tag magnetic">Database Design</span><span
+                        class="tag magnetic">Scalability</span></div>
             </div>
             <div class="project-visual">
-                <p style="opacity: 0.3; font-weight: 800; font-size: 2rem;">[ UI PREVIEW ]</p>
+                <p style="opacity: 0.3; font-weight: 800;">[ UI PREVIEW ]</p>
             </div>
         </div>
 
@@ -241,11 +172,11 @@
                     <li>Optimized asset loading in React Native to prevent memory leaks during heavy scrolls.</li>
                     <li>Engineered custom search and filtering logic for zero-latency discovery.</li>
                 </ul>
-                <div class="tag-cloud"><span class="tag">React Native</span><span class="tag">REST API</span><span
-                        class="tag">TMDB Engine</span></div>
+                <div class="tag-cloud"><span class="tag magnetic">React Native</span><span class="tag magnetic">REST API</span><span
+                        class="tag magnetic">TMDB Engine</span></div>
             </div>
             <div class="project-visual">
-                <p style="opacity: 0.3; font-weight: 800; font-size: 2rem;">[ APP PREVIEW ]</p>
+                <p style="opacity: 0.3; font-weight: 800;">[ APP PREVIEW ]</p>
             </div>
         </div>
 
@@ -260,8 +191,8 @@
                     <li>Achieved a 95+ PageSpeed score through extreme asset compression and code minification.</li>
                     <li>Responsive design tested across 5 distinct screen size breakpoints.</li>
                 </ul>
-                <div class="tag-cloud"><span class="tag">Vanilla JS</span><span class="tag">CSS Physics</span><span
-                        class="tag">SEO Tuning</span></div>
+                <div class="tag-cloud"><span class="tag magnetic">Vanilla JS</span><span class="tag magnetic">CSS Physics</span><span
+                        class="tag magnetic">SEO Tuning</span></div>
             </div>
             <div class="project-visual">
                 <p style="opacity: 0.3; font-weight: 800;">[ MOTION PREVIEW ]</p>
@@ -325,7 +256,7 @@
         </div>
     </section>
 
-    <section id="services" style="height: max-content; min-height: 0px; margin-bottom: -135px;">
+    <section id="reviews-title" style="height: max-content; min-height: 0px; margin-bottom: -135px;">
         <h2 class="reveal">Career <span class="highlight">Reviews</span></h2>
     </section>
 
@@ -379,24 +310,32 @@
         </div>
     </footer>
 
-
-
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/7.2.4/pixi.min.js"></script>
 
     <script src="./popup.js"></script>
-    <script src="./cursor.js"></script>
     <script src="./reviews.js"></script>
-    <script src="./3d-scroll.js"></script>
-    <script src="./liquid-mist.js"></script>
     <script src="./sound-toggle.js"></script>
-    <script src="./smoothScroll.js"></script>
-    <script src="./parallax-hover.js"></script>
     <script src="./reveal-animation.js"></script>
+
+    <script>
+        if (window.innerWidth > 768) {
+            [
+                "https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js",
+                "https://cdnjs.cloudflare.com/ajax/libs/pixi.js/7.2.4/pixi.min.js",
+                "./cursor.js",
+                "./3d-scroll.js",
+                "./liquid-mist.js",
+                "./smoothScroll.js",
+                "./magnetic-hover.js",
+                "./parallax-hover.js"
+            ].forEach(src => {
+                const script = document.createElement("script");
+                script.src = src;
+                document.body.appendChild(script);
+            });
+        }
+    </script>
 
     <script>
         const observer = new IntersectionObserver((entries) => {
@@ -405,6 +344,86 @@
             });
         }, { threshold: 0.1 });
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+
+    <script>
+        const loaderContainer = document.getElementById('extraordinary-loader');
+        const matrixGrid = document.getElementById('matrix-grid');
+
+        // Bento Card Spotlight Radial Tracking Effect
+        document.addEventListener("DOMContentLoaded", () => {
+
+            const cards = document.querySelectorAll('.bento-item');
+
+            cards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+
+                    card.style.setProperty('--x', `${x}px`);
+                    card.style.setProperty('--y', `${y}px`);
+                });
+            });
+
+            // Generate loader matrix
+            const totalCells = 144;
+
+            for (let i = 0; i < totalCells; i++) {
+
+                const cell = document.createElement('div');
+                cell.classList.add('matrix-cell');
+
+                const randomTranslateX = (Math.random() * 800 - 400).toFixed(2);
+                const randomTranslateY = (Math.random() * -1200 - 600).toFixed(2);
+                const randomRotate = (Math.random() * 360 - 180).toFixed(2);
+                const randomScale = (Math.random() * 0.4 + 0.1).toFixed(2);
+
+                cell.style.setProperty('--tx', `${randomTranslateX}px`);
+                cell.style.setProperty('--ty', `${randomTranslateY}px`);
+                cell.style.setProperty('--rot', `${randomRotate}deg`);
+                cell.style.setProperty('--sc', randomScale);
+
+                const delay = (Math.random() * 1.2).toFixed(2);
+                cell.style.transitionDelay = `${delay}s`;
+                cell.addEventListener('transitionstart', () => {
+                    if (loaderContainer.classList.contains('shatter')) {
+                        cell.style.transform =
+                            `translate3d(
+                            ${cell.style.getPropertyValue('--tx')},
+                            ${cell.style.getPropertyValue('--ty')},
+                            300px
+                        )
+                        scale(${cell.style.getPropertyValue('--sc')})
+                        rotate(${cell.style.getPropertyValue('--rot')})`;
+                    }
+                });
+                matrixGrid.appendChild(cell);
+            }
+            // Loader sequence
+            setTimeout(() => {
+                loaderContainer.classList.add('scanning');
+            }, 100);
+            setTimeout(() => {
+                loaderContainer.classList.add('shatter');
+            }, 1400);
+            setTimeout(() => {
+                loaderContainer.classList.add('faded');
+                // Start video only after intro finishes
+                const video = document.getElementById("hero-video");
+                if (video) {
+                    video.innerHTML = `
+                    <source src="./assets/hero_section_object_video_30fps_15s.webm" type="video/webm">
+                    <source src="./assets/hero_section_object_video_30fps_15s.mp4" type="video/mp4">
+                `;
+                    video.load();
+                    video.play().catch(() => {
+                        console.log("Autoplay blocked");
+                    });
+                }
+            }, 2200);
+        });
     </script>
 
 </html>
